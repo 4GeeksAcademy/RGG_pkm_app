@@ -1,0 +1,17 @@
+
+.navbar-bg{
+    background-color: #FFD700;
+}
+.fuente{
+    font-family: 'Press Start 2P', cursive;
+    
+}
+/* Boton buscar */
+.input-form{
+    border-radius:10px 0 0 10px;
+    border:0 
+}
+.btn-submit{
+    border-radius:0 10px 10px 0;
+    border : 0
+}
