@@ -11,9 +11,26 @@
       align-content: space-between;
       margin: 10px;
   }
+ .card-pkm{
+  
+  height: 15rem;
+  background-color: red;
+  margin: 5px;
+  border-radius: 5px;
+ }
+ .columna{
+  margin-right:15px
+ }
   
   .card{
     margin: 10px;
     border-radius: 5px;
   box-shadow: 6px 10px 5px 0px rgba(199,197,199,0.75);
+  }
+  .type{
+    background-color:#4169E1;
+    border-radius: 10px;
+    margin:3px;
+    color: #FFD700;
+    
   }

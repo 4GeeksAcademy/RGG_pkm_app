@@ -80,14 +80,19 @@ export const Pokedex = () => {
             ))
           ) : (
             poke.map((img, i) => (
-              <div id={img.id} key={img.id}>
-                <div className='card' style={{ width: '10rem', height: '15rem', backgroundColor: '#F0F0C9' }}>
+              <div className="row columna ">
+              <div className="card-pkm">
+              <div className="  col-3" id={img.id} key={img.id}>
+                
                   <img src={img.sprites.front_default} alt='pokemon' />
                   <div>
                     <h5>{img.name}</h5>
-                    <h6>type: {img.types[0].type.name}</h6>
+                    <h6 className="type">{img.types[0].type.name}</h6>
+                    {/* <button className="btn bg-success">Detalle del pokemon</button> */}
                   </div>
                 </div>
+              </div>
+             
               </div>
             ))
           )
