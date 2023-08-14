@@ -1,36 +1,82 @@
-.App {
-    text-align: center;
-  }
+
   
   
   .pokegallery{
-    
       display: flex;
       flex-wrap: wrap;
-      align-items: flex-start;
       align-content: space-between;
       margin: 10px;
+      justify-content: center;
+
   }
+  .pokemon-img{
+    margin: auto;
+    justify-content: center;
+  }
+.center-that{
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
  .card-pkm{
-  
-  height: 15rem;
+  width: 100%;
+  margin: 10px; 
   background-color: red;
   margin: 5px;
   border-radius: 5px;
+  
+ }
+ .center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px; /* Ajusta este margen según sea necesario */
+}
+ .details-pokedex{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+ }
+
+ 
+
+
+ 
+ .detalle-pokedex{
+  padding: 3px;
+ margin-top:5px;
+ margin-bottom: 5px;
+  border-radius: 10px;
+  border: none;
+  background-color: greenyellow;
+  width: 100%;
+  text-decoration: none;
  }
  .columna{
   margin-right:15px
  }
-  
+ .nameNumber{
+  display: flex;
+  justify-content: center;
+ }
+  .pokemon-id{
+    margin-right: 15px;
+  }
   .card{
     margin: 10px;
     border-radius: 5px;
   box-shadow: 6px 10px 5px 0px rgba(199,197,199,0.75);
+  background-color: palevioletred;
   }
   .type{
     background-color:#4169E1;
     border-radius: 10px;
     margin:3px;
     color: #FFD700;
+    display: inline-block;
+    padding: 3px;
+    
     
   }

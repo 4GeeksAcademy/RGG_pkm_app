@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import "../../styles/demo.css";
 import "../../styles/pokedex.css";
 
 export const Pokedex = () => {
@@ -57,23 +56,20 @@ export const Pokedex = () => {
           placeholder="¿Qué Pokémon buscas?"
           onChange={handleChange}
         />
-        <button className="btn btn-success">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
-            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-          </svg>
-        </button>
+      
 
         {load ? (
           <p>Loading...</p>
         ) : (
-          buscar.length > 0 ? ( // Utiliza 'buscar' para el filtrado
+          buscar.length > 0 ? ( 
             buscar.map((img, i) => (
               <div id={img.id} key={img.id}>
-                <div className='card' style={{ width: '10rem', height: '15rem', backgroundColor: '#F0F0C9' }}>
-                  <img src={img.sprites.front_default} alt='pokemon' />
-                  <div>
+                <div >
+                  <img src={img.sprites.front_default} className="pokemon-img" alt='pokemon' />
+                  <div >
                     <h5>{img.name}</h5>
                     <h6>type: {img.types[0].type.name}</h6>
+                    
                   </div>
                 </div>
               </div>
@@ -82,13 +78,17 @@ export const Pokedex = () => {
             poke.map((img, i) => (
               <div className="row columna ">
               <div className="card-pkm">
-              <div className="  col-3" id={img.id} key={img.id}>
+              <div className="center-that"  id={img.id} key={img.id}>
                 
                   <img src={img.sprites.front_default} alt='pokemon' />
-                  <div>
-                    <h5>{img.name}</h5>
+                  <div className='card'>
+                    <div className="nameNumber">
+                  <h5 className="pokemon-id">#{img.id}</h5>
+                    <h5 className="pokemon-name">{img.name}</h5>
+                    </div>
                     <h6 className="type">{img.types[0].type.name}</h6>
-                    {/* <button className="btn bg-success">Detalle del pokemon</button> */}
+                    <Link to= "/pokemonDetail" className="detalle-pokedex">Detalle del pokemon</Link>
+                  
                   </div>
                 </div>
               </div>
