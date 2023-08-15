@@ -50,12 +50,8 @@ export const Pokedex = () => {
   return (
     <div className="App">
       <div className='pokegallery'>
-        <input
-          className="form-control inputBuscar"
-          value={busqueda}
-          placeholder="¿Qué Pokémon buscas?"
-          onChange={handleChange}
-        />
+        <input className="form-control inputBuscar" value={busqueda} placeholder="¿Qué Pokémon buscas?"
+          onChange={handleChange}/>
       
 
         {load ? (
@@ -86,8 +82,20 @@ export const Pokedex = () => {
                   <h5 className="pokemon-id">#{img.id}</h5>
                     <h5 className="pokemon-name">{img.name}</h5>
                     </div>
-                    <h6 className="type">{img.types[0].type.name}</h6>
-                    <Link to= "/pokemonDetail" className="detalle-pokedex">Detalle del pokemon</Link>
+                    <div className="types">
+        <h6></h6>
+        <div className="type-pokedex">
+        {img.types.map((type, index) => (
+            <div key={index} className="type-box">
+                {type.type.name}
+            </div>
+        ))}
+    </div>
+    </div>
+                    <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
+
+
+
                   
                   </div>
                 </div>

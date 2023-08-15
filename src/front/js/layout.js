@@ -36,7 +36,7 @@ const Layout = () => {
                         <Route element={<LandingPage />} path="/" />
                         <Route element={<Pokedex />} path="/pokedex" />
                         <Route element={<Demo />} path="/demo" />
-                        <Route element={<PokemonDetail/>} path="/pokemonDetail" />
+                        <Route element={<PokemonDetail />} path="/pokedex/:pokemonId"   />
                         
 
                     </Routes>
