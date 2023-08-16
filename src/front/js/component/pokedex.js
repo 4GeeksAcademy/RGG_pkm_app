@@ -59,15 +59,35 @@ export const Pokedex = () => {
         ) : (
           buscar.length > 0 ? ( 
             buscar.map((img, i) => (
-              <div id={img.id} key={img.id}>
-                <div >
-                  <img src={img.sprites.front_default} className="pokemon-img" alt='pokemon' />
-                  <div >
-                    <h5>{img.name}</h5>
-                    <h6>type: {img.types[0].type.name}</h6>
-                    
+              <div className="row columna ">
+              <div className="card-pkm">
+              <div className="center-that"  id={img.id} key={img.id}>
+                
+                  <img src={img.sprites.front_default} alt='pokemon' />
+                  <div className='card'>
+                    <div className="nameNumber">
+                  <h5 className="pokemon-id">#{img.id}</h5>
+                    <h5 className="pokemon-name">{img.name}</h5>
+                    </div>
+                    <div className="types">
+        <h6></h6>
+        <div className="type-pokedex">
+        {img.types.map((type, index) => (
+            <div key={index} className="type-box">
+                {type.type.name}
+            </div>
+        ))}
+    </div>
+    </div>
+                    <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
+
+
+
+                  
                   </div>
                 </div>
+              </div>
+             
               </div>
             ))
           ) : (
