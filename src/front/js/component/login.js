@@ -13,12 +13,16 @@ export const Login = () =>{
 
     return(
         <div>
-            <h1>Login</h1>
+               <h2 className="title-login">Crea tu usuario en nuestra Pokedex!</h2>
             <form className="formulario">
-                <input type="text" value={nombre} onChange={e => setNombre(e.target.value)} />
-                <input type="text" value={alias} onChange={e => setAlias(e.target.value)} />
-                <input type="mail" value={mail} onChange={e => setMail(e.target.value)} />
-                <input type="password" value={pass} onChange={e => setPass(e.target.value)}/>
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" value={nombre} onChange={e => setNombre(e.target.value)} />
+                <label for="alias">Nickname:</label>
+                <input type="text" id="alias" value={alias} onChange={e => setAlias(e.target.value)} />
+                <label for="mail">Correo electrónico:</label>
+                <input type="mail" id="mail" value={mail} onChange={e => setMail(e.target.value)} />
+                <label for="password">Password</label>
+                <input type="password" id="password" value={pass} onChange={e => setPass(e.target.value)}/>
                 <button>Iniciar sesion</button>
             </form>
         </div>
