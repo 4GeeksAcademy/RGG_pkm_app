@@ -4,18 +4,30 @@ import logo from "../../img/logo.png"
 import  "../../styles/login.css"
 
 
+
 export const Login = () =>{
     const [nombre, setNombre] = useState("")
     const [password, setPass] = useState("")
     const [alias, setAlias] = useState("")
     const [mail, setMail] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
+    const [error, setError] = useState(false)
+
+    const handleSubmit =(e) =>{
+        e.preventDefault()
+
+        if(nombre === "" || password === "" || alias === "" || mail === "" || confirmPass === "" ){
+            setError(true)
+            return 
+        }
+        setError(false)
+    }
 
 
     return(
         <div>
                <h2 className="title-login">Crea tu usuario en nuestra Pokedex!</h2>
-            <form className="formulario">
+            <form className="formulario" onSubmit={handleSubmit}>
                 {/* <label for="name">Nombre:</label> */}
                 <input className="input-login" type="text" id="name" placeholder="Nombre" value={nombre} onChange={e => setNombre(e.target.value)} />
                 {/* <label for="alias">Nickname:</label> */}
@@ -27,6 +39,7 @@ export const Login = () =>{
                 <input className="input-login" type="password" placeholder="Confirm password" id="password" value={confirmPass} onChange={e => setConfirmPass(e.target.value)}/>
                 <button className="btn-danger">Crea tu usuario!</button>
             </form>
+            {error && <p className="error-login">Debes rellenar todos los campos!</p>}
         </div>
     )
 }

@@ -14,6 +14,7 @@ import { LandingPage } from "./component/landingPage";
 import { Pokedex } from "./component/pokedex";
 import { PokemonDetail } from "./component/pokemonDetail";
 import { Login } from "./component/login";
+import { UserPage } from "./component/userPage";
 
 
 //create your first component
@@ -39,6 +40,7 @@ const Layout = () => {
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<PokemonDetail />} path="/pokedex/:pokemonId"   />
                         <Route element={<Login />} path="/login" />
+                        <Route element ={<UserPage />} path="/userPage" />
                         
 
                     </Routes>

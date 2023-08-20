@@ -20,5 +20,10 @@
 .input-login{
     padding-bottom: 4px;
     border: none;
-    border-bottom:2px solid grey;
+   
+}
+.error-login{
+    color: red;
+    text-align: center;
+    font-weight: bold;
 }
