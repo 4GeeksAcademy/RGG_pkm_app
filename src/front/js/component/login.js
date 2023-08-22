@@ -1,45 +1,183 @@
-import React,{useState} from "react";
-import { Link } from "react-router-dom";
-import logo from "../../img/logo.png"
-import  "../../styles/login.css"
+import React, { useContext, useEffect, useState, useLayoutEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import "../../styles/login.css";
+import { Context } from "../store/appContext";
 
+export const Login = () => {
+  const [showLoginForm, setShowLoginForm] = useState(true);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { store, actions } = useContext(Context);
 
+  useLayoutEffect(() => {
+    // Ajustar el scroll al inicio del componente cada vez que se monte
+    window.scrollTo(0, 0);
+  }, []);
 
-export const Login = () =>{
-    const [nombre, setNombre] = useState("")
-    const [password, setPass] = useState("")
-    const [alias, setAlias] = useState("")
-    const [mail, setMail] = useState("")
-    const [confirmPass, setConfirmPass] = useState("")
-    const [error, setError] = useState(false)
+  const handleRegisterClick = () => {
+    setShowLoginForm(false);
+    document
+      .querySelector(".container__login-register")
+      .classList.add("formulario__register-active");
+  };
 
-    const handleSubmit =(e) =>{
-        e.preventDefault()
+  const handleLoginClick = () => {
+    setShowLoginForm(true);
+    document
+      .querySelector(".container__login-register")
+      .classList.remove("formulario__register-active");
+  };
 
-        if(nombre === "" || password === "" || alias === "" || mail === "" || confirmPass === "" ){
-            setError(true)
-            return 
-        }
-        setError(false)
+  useEffect(() => {
+    if (store.auth) {
+      const redirectPath = localStorage.getItem("redirectPath");
+      if (redirectPath) {
+        // Si hay una ruta almacenada en localStorage, redirige al usuario a esa ruta después del inicio de sesión
+        localStorage.removeItem("redirectPath"); // Limpiar el localStorage
+        navigate(redirectPath);
+      } else {
+        // Si no hay una ruta almacenada en localStorage, redirige al usuario a la página principal
+        navigate("/");
+      }
+    }
+  }, [store.auth, navigate]);
+
+  const handleLogin = async (event) => {
+    event.preventDefault();
+
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+
+    const success = await actions.login(email, password);
+    if (!success) {
+      setErrorMessage("Password or email incorrect");
+    }
+  };
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+
+    const name = event.target.name.value;
+    const last_name = event.target.last_name.value;
+    const nickname = event.target.nickname.value;
+    const email = event.target.email.value;
+    const birthday = event.target.birthday.value;
+    const password = event.target.password.value;
+
+    const requirements = [
+      "At least 8 characters in length",
+      "At least one uppercase letter",
+      "At least one lowercase letter",
+      "At least one digit"
+    ];
+
+    if (password.length < 8 ||
+        !/[A-Z]/.test(password) ||
+        !/[a-z]/.test(password) ||
+        !/\d/.test(password)) {
+      const formattedRequirements = requirements.map(req => `<li>${req}</li>`).join('');
+      setAlertMessage(`<p class = 'text-black'  >Password must meet the following requirements:</p><ul>${formattedRequirements}</ul>`);
+      return;
     }
 
+    const response = await fetch(process.env.BACKEND_URL + "/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ name, last_name, nickname, email, birthday, password }),
+    });
 
-    return(
-        <div>
-               <h2 className="title-login">Crea tu usuario en nuestra Pokedex!</h2>
-            <form className="formulario" onSubmit={handleSubmit}>
-                {/* <label for="name">Nombre:</label> */}
-                <input className="input-login" type="text" id="name" placeholder="Nombre" value={nombre} onChange={e => setNombre(e.target.value)} />
-                {/* <label for="alias">Nickname:</label> */}
-                <input className="input-login" placeholder="Nickname" type="text" id="alias" value={alias} onChange={e => setAlias(e.target.value)} />
-                {/* <label for="mail">Correo electrónico:</label> */}
-                <input className="input-login" type="mail" placeholder="Correo electrónico" id="mail" value={mail} onChange={e => setMail(e.target.value)} />
-                {/* <label for="password">Password</label> */}
-                <input className="input-login" type="password" placeholder="Password" id="pass" value={password} onChange={e => setPass(e.target.value)}/>
-                <input className="input-login" type="password" placeholder="Confirm password" id="password" value={confirmPass} onChange={e => setConfirmPass(e.target.value)}/>
-                <button className="btn-danger">Crea tu usuario!</button>
-            </form>
-            {error && <p className="error-login">Debes rellenar todos los campos!</p>}
+    const data = await response.json();
+
+    if (response.status === 200 && data.message === "User registered successfully") {
+      setShowSuccessAlert(true);
+      setAlertMessage("User registered successfully!");
+      setTimeout(() => {
+        setShowSuccessAlert(false);
+        navigate("/login");
+        handleLoginClick()
+      }, 3000);
+    } else if (response.status === 409 && data.message === "Nickname already exists") {
+      setAlertMessage("Nickname already exists");
+    } else {
+      setAlertMessage(data.message);
+    }
+  };
+
+  return (
+    <main>
+      <div className="container__todo">
+        <div className="caja__trasera">
+          <div className="caja__trasera__login">
+            <h3>Already have an account?</h3>
+              Log in to access the page
+            <button id="btn__iniciar-sesion" onClick={handleLoginClick}>
+              Log in
+            </button>
+          </div>
+          <div className="caja__trasera-register">
+            <h3>Don't have an account yet?</h3>
+            Register and enjoy the benefits
+            <button id="btn__registrarse" onClick={handleRegisterClick}>
+              Register
+            </button>
+          </div>
         </div>
-    )
-}
+        {/* Login and registration form */}
+        <div className="container__login-register">
+          <form
+            action=""
+            className={`formulario__login ${
+              showLoginForm ? "active" : "inactive"
+            }`}
+            onSubmit={handleLogin}
+          >
+            <h2>Log in</h2>
+            {errorMessage && (
+              <div className="alert alert-warning" role="alert">
+                {errorMessage}
+              </div>
+            )}
+            <input type="text" name="email" placeholder="Email" />
+            <br />
+            <input type="password" name="password" placeholder="Password" />
+            <br />
+            <button type="submit">Enter</button>
+          </form>
+          <form
+            action=""
+            className={`formulario__register ${
+              showLoginForm ? "inactive" : "active"
+            }`}
+            onSubmit={handleRegister}
+          >
+            <h2>Register</h2>
+            {alertMessage && (
+              <div
+                className={`alert ${showSuccessAlert ? "alert-success text-black" : "alert-warning text-black"}`} 
+                role="alert"
+                dangerouslySetInnerHTML={{ __html: alertMessage }}
+              />
+            )}
+            <input type="text" name="name" placeholder="Name" />
+            <br />
+            <input type="text" name="last_name" placeholder="Last Name" />
+            <br />
+            <input type="text" name="nickname" placeholder="Nickname" />
+            <br />
+            <input type="text" name="email" placeholder="Email" />
+            <br />
+            <input type="date" name="birthday" placeholder="Birthday" />
+            <br />
+            <input type="password" name="password" placeholder="Password" />
+            <button type="submit">Register</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  );
+};
