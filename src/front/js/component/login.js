@@ -83,7 +83,7 @@ export const Login = () => {
       return;
     }
 
-    const response = await fetch(process.env.BACKEND_URL + "/api/register", {
+    const response = await fetch(process.env.BACKEND_URL + "/api/routes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -148,8 +148,7 @@ export const Login = () => {
             <br />
             <button type="submit">Enter</button>
           </form>
-          <form
-            action=""
+          <form action=""
             className={`formulario__register ${
               showLoginForm ? "inactive" : "active"
             }`}

@@ -80,6 +80,7 @@ export const Pokedex = () => {
     </div>
     </div>
                     <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
+                    <button className="btn-primary" onclick="#">Agregar a mis favoritos</button>
 
 
 
