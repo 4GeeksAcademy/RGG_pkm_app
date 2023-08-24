@@ -15,6 +15,8 @@ import { Pokedex } from "./component/pokedex";
 import { PokemonDetail } from "./component/pokemonDetail";
 import { Login } from "./component/login";
 import { UserPage } from "./component/userPage";
+import { Favoritos } from "./component/favoritos";
+import { ClickCounter } from "./component/clickCounter"
 
 
 //create your first component
@@ -32,15 +34,17 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<Single />} path="/single/:theid" />
-                        <Route element={<h1>Not found!</h1>} />
-                        <Route element={<LandingPage />} path="/" />
-                        <Route element={<Pokedex />} path="/pokedex" />
-                        <Route element={<Demo />} path="/demo" />
-                        <Route element={<PokemonDetail />} path="/pokedex/:pokemonId"   />
-                        <Route element={<Login />} path="/login" />
-                        <Route element ={<UserPage />} path="/userPage" />
+                        <Route element = {<Demo />} path="/demo" />
+                        <Route element = {<Single />} path="/single/:theid" />
+                        <Route element = {<h1>Not found!</h1>} />
+                        <Route element = {<LandingPage />} path="/" />
+                        <Route element = {<Pokedex />} path="/pokedex" />
+                        <Route element = {<Demo />} path="/demo" />
+                        <Route element = {<PokemonDetail />} path="/pokedex/:pokemonId"   />
+                        <Route element = {<Login />} path="/login" />
+                        <Route element = {<UserPage />} path="/userPage" />
+                        <Route element = {<Favoritos />} path="/favoritos" />
+                        <Route element = {<ClickCounter />} path ="/clickCounter" />
                         
 
                     </Routes>
