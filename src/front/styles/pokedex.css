@@ -96,3 +96,10 @@
     border-radius: 10px;
     color: aliceblue;
   }
+  .button-favourites{
+    background-color: #13fc2f;
+    border-radius: 10px;
+    color:  #f7a497 ;
+    margin-top:5px;
+    margin-bottom: 7px;
+  }
