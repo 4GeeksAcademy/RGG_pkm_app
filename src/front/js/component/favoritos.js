@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/favoritos.css"; // Asegúrate de importar tus estilos CSS
 
-const Favoritos = ({ favoritos }) => {
+export const Favoritos = ({ favoritos }) => {
   return (
     <div className="favoritos-container">
       <h2>Mis Pokémon Favoritos</h2>

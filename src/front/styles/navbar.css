@@ -1,6 +1,14 @@
 
 .navbar-bg{
     background-color: #FFD700;
+   
+}
+.navbar-collapse{
+    display: flex;
+    justify-content: space-around;
+}
+.buttton-login-navbar{
+    width: inherit;
 }
 .fuente{
     font-family: 'Press Start 2P', cursive;
@@ -10,6 +18,10 @@
 .input-form{
     border-radius:10px 0 0 10px;
     border:0 
+}
+.favoritos-button{
+    text-decoration: none;
+    color: aliceblue;
 }
 .btn-submit{
     border-radius:0 10px 10px 0;

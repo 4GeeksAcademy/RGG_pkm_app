@@ -29,7 +29,7 @@ export const Navbar = () => {
  </span>
 
 </form>
-<Link to ="favoritos">Favoritos</Link>
+<Link className="favoritos-button" to ="favoritos">Favoritos</Link>
 	  <div className="btn  buttton-login-navbar mb-2 mb-lg-0 col-md-7  col-sm-4 ">
 {isLoggedIn ? (
   <>
