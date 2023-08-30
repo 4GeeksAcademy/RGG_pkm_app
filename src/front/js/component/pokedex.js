@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,  } from "react";
 import { Link, useParams } from "react-router-dom";
 import "../../styles/pokedex.css";
 
@@ -9,9 +9,8 @@ export const Pokedex = () => {
   const [buscar, setBuscar] = useState([]);
   const [tablaPokemon, setTablaPokemon] = useState([]);
   const [busqueda, setBusqueda] = useState([]);
-  const [favoritos, setFavoritos] = useState([]);
-  const LikeButton = ({children, isLike, onLike}) =>{
-  const Icon = isLike ? IconLiked : IconUnliked;
+
+  
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);
@@ -25,15 +24,7 @@ export const Pokedex = () => {
     setBuscar(resultadoBusqueda);
   };
 
-  const agregarFavorito = (pokemonName) => {
-    if (!favoritos.includes(pokemonName)) {
-      setFavoritos([...favoritos, pokemonName]);
-    }
-  };
 
-  const eliminarFavorito = (pokemonName) => {
-    setFavoritos(favoritos.filter((name) => name !== pokemonName));
-  };
 
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon/?limit=151')
@@ -59,6 +50,7 @@ export const Pokedex = () => {
         setLoad(false);
       });
   }, []);
+
 
   return (
     <div className="App">
@@ -90,12 +82,12 @@ export const Pokedex = () => {
                         </div>
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
-                       <ClickCounter
+                       {/* <ClickCounter
                         pokemonName={img.name}
                         agregarFavorito={agregarFavorito}
                         eliminarFavorito={eliminarFavorito}
                         esFavorito={favoritos.includes(img.name)}
-                      /> 
+                      />  */}
                     </div>
                   </div>
                 </div>
@@ -123,20 +115,15 @@ export const Pokedex = () => {
                         </div>
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
-                       <clickCounter
+                   
+                       {/* <clickCounter
                         pokemonName={img.name}
                         agregarFavorito={agregarFavorito}
                         eliminarFavorito={eliminarFavorito}
                         esFavorito={favoritos.includes(img.name)}
                         
                       /> 
-                      <div className = {className ("likeButton", {"likeButton-active": isLike,)}onClick={event => {
-                        event.preventDefault ( );
-onLike (event);
-
-}}
-
->
+                      */}
                     </div>
                   </div>
                 </div>
@@ -147,5 +134,4 @@ onLike (event);
       </div>
     </div>
   );
-};
 };
