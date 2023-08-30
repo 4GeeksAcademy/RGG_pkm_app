@@ -10,6 +10,8 @@ export const Pokedex = () => {
   const [tablaPokemon, setTablaPokemon] = useState([]);
   const [busqueda, setBusqueda] = useState([]);
   const [favoritos, setFavoritos] = useState([]);
+  const LikeButton = ({children, isLike, onLike}) =>{
+  const Icon = isLike ? IconLiked : IconUnliked;
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);
@@ -88,12 +90,12 @@ export const Pokedex = () => {
                         </div>
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
-                      <ClickCounter
+                       <ClickCounter
                         pokemonName={img.name}
                         agregarFavorito={agregarFavorito}
                         eliminarFavorito={eliminarFavorito}
                         esFavorito={favoritos.includes(img.name)}
-                      />
+                      /> 
                     </div>
                   </div>
                 </div>
@@ -121,12 +123,20 @@ export const Pokedex = () => {
                         </div>
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
-                      <clickCounter
+                       <clickCounter
                         pokemonName={img.name}
                         agregarFavorito={agregarFavorito}
                         eliminarFavorito={eliminarFavorito}
                         esFavorito={favoritos.includes(img.name)}
-                      />
+                        
+                      /> 
+                      <div className = {className ("likeButton", {"likeButton-active": isLike,)}onClick={event => {
+                        event.preventDefault ( );
+onLike (event);
+
+}}
+
+>
                     </div>
                   </div>
                 </div>
@@ -137,4 +147,5 @@ export const Pokedex = () => {
       </div>
     </div>
   );
+};
 };
