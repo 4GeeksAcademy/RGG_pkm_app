@@ -1,6 +1,7 @@
-import React, { useState, useEffect,  } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../../styles/pokedex.css";
+import { Favoritos } from "./Favoritos"; // Asegúrate de importar el componente Favoritos correctamente
 
 export const Pokedex = () => {
   const [result, setResult] = useState([]);
@@ -9,12 +10,15 @@ export const Pokedex = () => {
   const [buscar, setBuscar] = useState([]);
   const [tablaPokemon, setTablaPokemon] = useState([]);
   const [busqueda, setBusqueda] = useState([]);
-
-  
+  const [favoritos, setFavoritos] = useState([]); // Estado para los favoritos
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);
     filtrar(e.target.value);
+  };
+
+  const agregarFavorito = (pokemonName) => {
+    setFavoritos([...favoritos, pokemonName]);
   };
 
   const filtrar = (terminoBusqueda) => {
@@ -23,8 +27,6 @@ export const Pokedex = () => {
     );
     setBuscar(resultadoBusqueda);
   };
-
-
 
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon/?limit=151')
@@ -50,7 +52,6 @@ export const Pokedex = () => {
         setLoad(false);
       });
   }, []);
-
 
   return (
     <div className="App">
@@ -82,12 +83,8 @@ export const Pokedex = () => {
                         </div>
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
-                       {/* <ClickCounter
-                        pokemonName={img.name}
-                        agregarFavorito={agregarFavorito}
-                        eliminarFavorito={eliminarFavorito}
-                        esFavorito={favoritos.includes(img.name)}
-                      />  */}
+                      {/* Agregar a Favoritos */}
+                      <button onClick={() => agregarFavorito(img.name)}>Agregar a Favoritos</button>
                     </div>
                   </div>
                 </div>
@@ -115,15 +112,8 @@ export const Pokedex = () => {
                         </div>
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
-                   
-                       {/* <clickCounter
-                        pokemonName={img.name}
-                        agregarFavorito={agregarFavorito}
-                        eliminarFavorito={eliminarFavorito}
-                        esFavorito={favoritos.includes(img.name)}
-                        
-                      /> 
-                      */}
+                      {/* Agregar a Favoritos */}
+                      <button onClick={() => agregarFavorito(img.name)}>Agregar a Favoritos</button>
                     </div>
                   </div>
                 </div>
@@ -132,6 +122,8 @@ export const Pokedex = () => {
           )
         )}
       </div>
+      {/* Renderiza el componente Favoritos y pasa la lista de favoritos como prop */}
+      <Favoritos favoritos={favoritos} />
     </div>
   );
 };

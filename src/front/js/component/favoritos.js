@@ -1,5 +1,6 @@
-import React from "react";
-import "../../styles/favoritos.css"; // Asegúrate de importar tus estilos CSS
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "../../styles/favoritos.css";
 
 export const Favoritos = ({ favoritos }) => {
   return (
