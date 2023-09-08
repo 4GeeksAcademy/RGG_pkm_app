@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/pokedex.css";
-import { Favoritos } from "./Favoritos"; // Asegúrate de importar el componente Favoritos correctamente
+import { Favoritos } from "./favoritos"; // Asegúrate de importar el componente Favoritos correctamente
 
 export const Pokedex = () => {
   const [result, setResult] = useState([]);

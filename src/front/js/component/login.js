@@ -83,7 +83,7 @@ export const Login = () => {
       return;
     }
 
-    const response = await fetch(process.env.BACKEND_URL + "/api/routes", {
+    const response = await fetch(process.env.BACKEND_URL + "/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
