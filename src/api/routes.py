@@ -43,7 +43,7 @@ def register():
 
     return jsonify({"message": "User registered successfully"}), 201
 
-@api.route("/login", methods=["POST"])
+@api.route("/userPage", methods=["POST"])
 def login():
     data = request.get_json()
     email = data.get("email")
@@ -59,12 +59,12 @@ def login():
     token = create_access_token(identity=user.id)
     return jsonify({"token": token}), 200
 
-@api.route("/private", methods=["POST"])
+@api.route("/userPage", methods=["POST"])
 @jwt_required()
 def validate_token():
     return jsonify({"message": "Token is valid"}), 200
 
-@api.route("/private", methods=["GET"])
+@api.route("/userPage", methods=["GET"])
 @jwt_required()
 def get_user_info():
     current_user_id = get_jwt_identity()

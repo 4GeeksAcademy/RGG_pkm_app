@@ -7,7 +7,6 @@ import { Home } from "./pages/home";
 import { Demo } from "./pages/demo";
 import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
-
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { LandingPage } from "./component/landingPage";
@@ -16,7 +15,8 @@ import { PokemonDetail } from "./component/pokemonDetail";
 import { Login } from "./component/login";
 import { UserPage } from "./component/userPage";
 import { Favoritos } from "./component/favoritos";
-import { ClickCounter } from "./component/clickCounter"
+
+
 
 
 //create your first component
@@ -44,7 +44,9 @@ const Layout = () => {
                         <Route element = {<Login />} path="/login" />
                         <Route element = {<UserPage />} path="/userPage" />
                         <Route element = {<Favoritos />} path="/favoritos" />
-                        <Route element = {<ClickCounter />} path ="/clickCounter" />
+                    
+                        <Route element= {<UserPage />} path="/userPage" />
+                        
                         
 
                     </Routes>
