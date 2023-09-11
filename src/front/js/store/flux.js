@@ -43,14 +43,16 @@ const getState = ({ getStore, getActions, setStore }) => {
   
 		login: async (email, password) => {
 		  try {
-			const response = await fetch("/api/login", {
+			const response = await fetch(process.env.BACKEND_URL + "api/login", {
 			  method: "POST",
 			  headers: {
 				"Content-Type": "application/json",
+				"Authorization": "Bearer" + sessionStorage.getItem("token"),
 			  },
-			  body: JSON.stringify({ email, password }),
+			  body: JSON.stringify({ email: email, password: password }),
 			});
-  
+			const data = await response.json()
+			sessionStorage.setItem("token",data.token) 
 			if (response.status === 200) {
 			  setStore({ auth: true });
 			  return true;

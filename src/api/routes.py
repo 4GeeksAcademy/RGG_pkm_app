@@ -43,7 +43,7 @@ def register():
 
     return jsonify({"message": "User registered successfully"}), 201
 
-@api.route("/userPage", methods=["POST"])
+@api.route("/login", methods=["POST"])
 def login():
     data = request.get_json()
     email = data.get("email")
@@ -53,7 +53,7 @@ def login():
         return jsonify({"message": "Email and password are required"}), 400
 
     user = User.query.filter_by(email=email).first()
-    if user is None or not user.check_password(password):
+    if not user :
         return jsonify({"message": "Invalid credentials"}), 401
 
     token = create_access_token(identity=user.id)
