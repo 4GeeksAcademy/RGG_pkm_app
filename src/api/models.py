@@ -42,7 +42,7 @@ def register():
     last_name = data.get("last_name")
     nickname = data.get("nickname")
     birthday = data.get("birthday")
-    avatar = data.get("avatar")
+    
     
     if not email or not password:
         return jsonify({"message": "Email and password are required"})
@@ -63,7 +63,7 @@ def register():
         last_name=last_name,
         nickname=nickname,
         birthday=birthday,
-        avatar=avatar,
+        
     )
 
     db.session.add(new_user)

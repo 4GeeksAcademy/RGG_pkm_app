@@ -145,7 +145,7 @@ export const Login = () => {
             )}
             <input type="text" name="email" placeholder="Email" />
             <br />
-            <input type="password" name="password" placeholder="Password" />
+            <input type="text" name="password" placeholder="Password" />
             <br />
             <button type="submit">Enter</button>
           </form>
