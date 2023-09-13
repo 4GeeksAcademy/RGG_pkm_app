@@ -14,13 +14,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			initial: "white"
 		  }
 		],
+		favourites:[],
 		auth: null // Campo de autenticación
 	  },
 	  actions: {
+		setFavourite: (img) =>{
+
+				const store = getStore();	
+				console.log([...store.favourites, img]);
+				setStore({ favourites: [...store.favourites, img] });
+		  },
 		exampleFunction: () => {
 		  getActions().changeColor(0, "green");
 		},
-  
+		
 		getMessage: async () => {
 		  try {
 			const resp = await fetch(process.env.BACKEND_URL + "/api/hello");
@@ -69,6 +76,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 	  }
 	};
   };
-  
+
   export default getState;
   

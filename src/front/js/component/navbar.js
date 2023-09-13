@@ -1,9 +1,12 @@
-import React,{useState} from "react";
+import React,{useState,useContext} from "react";
+import { Context} from "../store/appContext";
+
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png"
 import  "../../styles/navbar.css"
 
 export const Navbar = () => {
+	const {store} = useContext(Context)
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const handleLogout = () => {
 	  setIsLoggedIn(false);
@@ -29,7 +32,8 @@ export const Navbar = () => {
  </span>
 
 </form>
-<Link className="favoritos-button" to ="favoritos">Favoritos</Link>
+
+<Link to={"/favoritos"} className="favoritos-button">Favoritos: {store.favourites.length} </Link>
 	  <div className="btn  buttton-login-navbar mb-2 mb-lg-0 col-md-7  col-sm-4 ">
 {isLoggedIn ? (
   <>

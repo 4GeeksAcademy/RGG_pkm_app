@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
+import {Context} from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/favoritos.css";
 
-export const Favoritos = ({ favoritos }) => {
+export const Favoritos = () => {
+  const {store} = useContext(Context)
   return (
-    <div className="favoritos-container">
-      <h2>Mis Pokémon Favoritos</h2>
-      {favoritos.length === 0 ? (
-        <p>No has agregado ningún Pokémon a tus favoritos.</p>
-      ) : (
-        <ul>
-          {favoritos.map((pokemonName) => (
-            <li key={pokemonName}>{pokemonName}</li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <>
+    <ul>
+      {
+        store.favourites.map((img)=>{
+          return <li>{img.name}</li>
+        })
+      }
+    </ul>
+    </>
   );
 };
 
