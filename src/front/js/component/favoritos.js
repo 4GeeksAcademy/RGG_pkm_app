@@ -6,15 +6,56 @@ import "../../styles/favoritos.css";
 export const Favoritos = () => {
   const {store} = useContext(Context)
   return (
-    <>
-    <ul>
+  
+    
+    <div className="favoritos-container">
+      <ul className="favoritos-list">
       {
+        
         store.favourites.map((img)=>{
-          return <li>{img.name}</li>
+          
+          return <li>  
+            <div className="app">
+            <div className="pokegallery">
+             <div className="row columna " key={img.id}>
+                <div className="card-pkm">
+          <div className="center-that" id={img.id}>
+            <img src={img.sprites.front_default} alt='pokemon' />
+            <div className='card'>
+              <div className="nameNumber">
+                <h5 className="pokemon-id">#{img.id}</h5>
+                <h5 className="pokemon-name">{img.name}</h5>
+              </div>
+              <div className="types">
+                <h6></h6>
+                <div className="type-pokedex">
+                  {img.types.map((type, index) => (
+                    <div key={index} className="type-box">
+                      {type.type.name}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
+              {/* Agregar a Favoritos */}
+              <button className="btn btn-success" 
+              onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
+            </div>
+          </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </li>;
+              
+                 
+          
+          
         })
       }
     </ul>
-    </>
+    
+</div>
   );
 };
 
