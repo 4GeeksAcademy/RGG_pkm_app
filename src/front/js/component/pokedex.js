@@ -84,7 +84,7 @@ export const Pokedex = () => {
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
                       {/* Agregar a Favoritos */}
-                      <button className="btn btn-success" 
+                      <button className="btn button-favourites" 
                       onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
                     </div>
                   </div>
@@ -114,7 +114,7 @@ export const Pokedex = () => {
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
                       {/* Agregar a Favoritos */}
-                      <button className="btn btn-success" onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
+                      <button className="btn button-favourites" onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
                     </div>
                   </div>
                 </div>

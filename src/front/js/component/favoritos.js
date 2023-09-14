@@ -10,7 +10,9 @@ export const Favoritos = () => {
     
     <div className="favoritos-container">
       <ul className="favoritos-list">
-      {
+       {store.favourites.length === 0 ? ( // Verifica si no hay favoritos
+          <li>No has agregado ningún Pokémon a tus favoritos.Agrega uno <Link to="/pokedex">aquí</Link></li>
+        ) : (
         
         store.favourites.map((img)=>{
           
@@ -52,7 +54,7 @@ export const Favoritos = () => {
           
           
         })
-      }
+      )}
     </ul>
     
 </div>
