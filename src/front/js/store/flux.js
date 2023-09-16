@@ -24,6 +24,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log([...store.favourites, img]);
 				setStore({ favourites: [...store.favourites, img] });
 		  },
+		  DelFavourite: (img) => {
+			const store = getStore();
+			const updatedFavorites = store.favourites.filter(favorite => favorite !== img);
+			setStore({ favourites: updatedFavorites });
+		  },  
 		exampleFunction: () => {
 		  getActions().changeColor(0, "green");
 		},
@@ -49,14 +54,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
   
 		login: async (email, password) => {
+			console.log(email, password)
 		  try {
 			const response = await fetch(process.env.BACKEND_URL + "api/login", {
 			  method: "POST",
 			  headers: {
 				"Content-Type": "application/json",
-				"Authorization": "Bearer " + sessionStorage.getItem("token"),
+				// "Authorization": "Bearer " + sessionStorage.getItem("token"),
 			  },
-			  body: JSON.stringify({ email: email, password: password }),
+			//   body: JSON.stringify({ email: email, password: password }),
+			body: []
 			});
 			const data = await response.json()
 			sessionStorage.setItem("token",data.token) 

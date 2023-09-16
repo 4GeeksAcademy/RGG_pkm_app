@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import "../../styles/favoritos.css";
 
 export const Favoritos = () => {
-  const {store} = useContext(Context)
+  const { store, actions } = useContext(Context);
+
   return (
   
     
@@ -40,8 +41,8 @@ export const Favoritos = () => {
               </div>
               <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
               {/* Agregar a Favoritos */}
-              <button className="btn btn-success" 
-              onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
+              <button className="btn button-favourites" 
+              onClick={() =>{actions.DelFavourite(img)}}>Eliminar de favoritos</button>
             </div>
           </div>
         </div>
