@@ -62,8 +62,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				"Content-Type": "application/json",
 				// "Authorization": "Bearer " + sessionStorage.getItem("token"),
 			  },
-			//   body: JSON.stringify({ email: email, password: password }),
-			body: []
+			  body: JSON.stringify({ email: email, password: password }),
+			
 			});
 			const data = await response.json()
 			sessionStorage.setItem("token",data.token) 
