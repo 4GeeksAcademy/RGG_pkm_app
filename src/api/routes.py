@@ -23,11 +23,9 @@ def register():
     last_name = data.get("last_name")
     nickname = data.get("nickname")
     birthday = data.get("birthday")
-    
 
     if not email or not password:
         return jsonify({"message": "Email and password are required"}), 400
-    
 
     existing_user = User.query.filter_by(email=email).first()
     if existing_user:
@@ -40,7 +38,6 @@ def register():
         last_name=last_name,
         nickname=nickname,
         birthday=birthday,
-        
     )
 
     db.session.add(new_user)
@@ -58,34 +55,10 @@ def login():
         return jsonify({"message": "Email and password are required"}), 400
 
     user = User.query.filter_by(email=email).first()
-    if user (user.password == password):
+    if user and (user.password == password):
         token = create_access_token(identity=user.id)
         return jsonify({"token": token}), 200
 
-    if not user :
-        return jsonify({"message": "Invalid credentials"}), 401
-          
-   
-
-@api.route("/userPage", methods=["POST"])
-@jwt_required()
-def validate_token():
-    return jsonify({"message": "Token is valid"}), 200
-
-@api.route("/userPage", methods=["POST"])
-@jwt_required()
-def get_user_info():
-    current_user_id = get_jwt_identity()
-    print(current_user_id)
-
-    user = User.query.filter_by(id= current_user_id).first()
-    if user is None:
-        raise APIException("User not found", status_code=404)
-    print(user)
-
-    return jsonify("User authenticated"), 200
-
-    
 
 
 if __name__ == "__main__":
