@@ -1,4 +1,57 @@
 .footer-bg{
     background-color: #4169E1;
     font-family: 'Pokemon solid', sans-serif;
+    color: white;
+    padding-bottom: 10px;
 }
+.footer-icons{
+    display: flex;
+    margin: 0 auto;
+    justify-content: space-around;
+    width: 25%;
+    padding-bottom: 10px;
+}
+.github{
+    color:white;
+    font-size: 32px;
+    margin-right: 10px;
+}
+.linkedin{
+    color: white;
+    margin-right: 10px;
+    font-size: 32px;
+}
+.email-link {
+    text-decoration: none; /* Elimina la subraya del enlace */
+    display: inline-flex; /* Muestra el enlace como flexbox para alinear verticalmente el ícono y el texto */
+    align-items: center; /* Alinea verticalmente el ícono y el texto */
+    margin-right: 10px; /* Agrega margen derecho si es necesario */
+    color:white;
+    
+  }
+  
+ /* Agrega transiciones de rotación y cambio de color a los iconos */
+.footer-icons a:hover .github,
+.footer-icons a:hover .linkedin,
+.footer-icons a:hover .email-link {
+  transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+/* Aplica la rotación al pasar el ratón por los iconos */
+.footer-icons a:hover .github,
+.footer-icons a:hover .linkedin,
+.footer-icons a:hover .email-link {
+  transform: rotate(360deg);
+}
+
+/* Cambia el color al pasar el ratón por los iconos */
+.footer-icons a:hover .github,
+.footer-icons a:hover .linkedin,
+.footer-icons a:hover .email-link {
+  color: #FFD700; /* Cambia el color al pasar el ratón */
+}
+
+
+  
+  
+  
