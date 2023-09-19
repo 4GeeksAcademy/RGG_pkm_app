@@ -41,7 +41,7 @@ export const Login = () => {
         navigate(redirectPath);
       } else {
         // Si no hay una ruta almacenada en localStorage, redirige al usuario a la página principal
-        navigate("/");
+        navigate("/../userPage");
       }
     }
   }, [store.auth, navigate]);

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/pokedex.css";
 import { Context} from "../store/appContext"
+
 import { Favoritos } from "./favoritos"; // Asegúrate de importar el componente Favoritos correctamente
 
 export const Pokedex = () => {
