@@ -58,7 +58,17 @@ def login():
     if user and (user.password == password):
         token = create_access_token(identity=user.id)
         return jsonify({"token": token}), 200
-
+    
+@api.route("/private", methods=["GET"])
+@jwt_required()
+def get_user_info():
+    current_user_id = get_jwt_identity()
+    user = User.query.filter_by(id=current_user_id).first()
+    
+    if user is None:
+        return jsonify({"message": "User not found"}), 404
+    
+    return jsonify(message="Welcome, {}".format(user.name)), 200
 
 
 if __name__ == "__main__":

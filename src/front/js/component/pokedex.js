@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/pokedex.css";
-import { Context} from "../store/appContext"
-
-import { Favoritos } from "./favoritos"; // Asegúrate de importar el componente Favoritos correctamente
+import { Context } from "../store/appContext";
 
 export const Pokedex = () => {
   const [result, setResult] = useState([]);
@@ -12,15 +10,12 @@ export const Pokedex = () => {
   const [buscar, setBuscar] = useState([]);
   const [tablaPokemon, setTablaPokemon] = useState([]);
   const [busqueda, setBusqueda] = useState([]);
-  const {actions} = useContext(Context);
-
+  const { store, actions } = useContext(Context);
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);
     filtrar(e.target.value);
   };
-
- 
 
   const filtrar = (terminoBusqueda) => {
     let resultadoBusqueda = tablaPokemon.filter((elemento) =>
@@ -85,8 +80,12 @@ export const Pokedex = () => {
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
                       {/* Agregar a Favoritos */}
-                      <button className="btn button-favourites" 
-                      onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
+                      {store.isAuthenticated ? (
+                        <button className="btn button-favourites" 
+                        onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
+                      ) : (
+                        <p>Debes iniciar sesión para agregar a favoritos</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -115,7 +114,12 @@ export const Pokedex = () => {
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
                       {/* Agregar a Favoritos */}
-                      <button className="btn button-favourites" onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
+                      {store.isAuthenticated ? (
+                        <button className="btn button-favourites" 
+                        onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
+                      ) : (
+                        <p>Debes iniciar sesión para agregar a favoritos</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -124,8 +128,6 @@ export const Pokedex = () => {
           )
         )}
       </div>
-      {/* Renderiza el componente Favoritos y pasa la lista de favoritos como prop */}
-     
     </div>
   );
 };
