@@ -13,7 +13,7 @@ export const UserPage = () => {
 
   useEffect(() => {
     // Hacer una solicitud HTTP para obtener los datos del usuario desde Flask
-    fetch(process.env.BACKEND_URL + "/api/register")
+    fetch(process.env.BACKEND_URL + "private")
       .then((response) => response.json())
       .then((data) => {
         // Actualizar el estado local con los datos del usuario obtenidos
@@ -50,7 +50,7 @@ export const UserPage = () => {
                     type="text"
                     className="form-control input-user"
                     id="userSurname"
-                    defaultValue={userData.userLastName}
+                    value={userData.userLastName}
                     disabled
                     aria-describedby="emailHelp"
                   />
@@ -66,7 +66,7 @@ export const UserPage = () => {
                     className="form-control input-user"
                     id="exampleInputEmail1"
                     disabled
-                    defaultValue={userData.nickname}
+                    value={userData.nickname}
                   />
                 </div>
                 <div className="mb-3 col-lg-6">
@@ -78,7 +78,7 @@ export const UserPage = () => {
                     className="form-control input-user"
                     id="birthday"
                     disabled
-                    defaultValue={userData.userBirthday}
+                    value={userData.userBirthday}
                   />
                 </div>
               </div>
