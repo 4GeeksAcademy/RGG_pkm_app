@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "../../styles/login.css";
 import { Context } from "../store/appContext";
 
-
 export const Login = () => {
   const [showLoginForm, setShowLoginForm] = useState(true);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -41,7 +40,7 @@ export const Login = () => {
         navigate(redirectPath);
       } else {
         // Si no hay una ruta almacenada en localStorage, redirige al usuario a la página principal
-        navigate("/../userPage");
+        navigate("/userPage");
       }
     }
   }, [store.auth, navigate]);
@@ -80,11 +79,11 @@ export const Login = () => {
         !/[a-z]/.test(password) ||
         !/\d/.test(password)) {
       const formattedRequirements = requirements.map(req => `<li>${req}</li>`).join('');
-      setAlertMessage(`<p class = 'text-black'  >Password must meet the following requirements:</p><ul>${formattedRequirements}</ul>`);
+      setAlertMessage(`<p class='text-black'>Password must meet the following requirements:</p><ul>${formattedRequirements}</ul>`);
       return;
     }
 
-    const response = await fetch(process.env.BACKEND_URL + "/api/register", {
+    const response = await fetch(process.env.BACKEND_URL + "/api/private", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +99,7 @@ export const Login = () => {
       setTimeout(() => {
         setShowSuccessAlert(false);
         navigate("/login");
-        handleLoginClick()
+        handleLoginClick();
       }, 3000);
     } else if (response.status === 409 && data.message === "Nickname already exists") {
       setAlertMessage("Nickname already exists");
@@ -115,7 +114,7 @@ export const Login = () => {
         <div className="caja__trasera">
           <div className="caja__trasera__login">
             <h3>Already have an account?</h3>
-              Log in to access the page
+            Log in to access the page
             <button id="btn__iniciar-sesion" onClick={handleLoginClick}>
               Log in
             </button>
@@ -145,11 +144,12 @@ export const Login = () => {
             )}
             <input type="text" name="email" placeholder="Email" />
             <br />
-            <input type="text" name="password" placeholder="Password" />
+            <input type="password" name="password" placeholder="Password" />
             <br />
             <button type="submit">Enter</button>
           </form>
-          <form action=""
+          <form
+            action=""
             className={`formulario__register ${
               showLoginForm ? "inactive" : "active"
             }`}
@@ -158,7 +158,9 @@ export const Login = () => {
             <h2>Register</h2>
             {alertMessage && (
               <div
-                className={`alert ${showSuccessAlert ? "alert-success text-black" : "alert-warning text-black"}`} 
+                className={`alert ${
+                  showSuccessAlert ? "alert-success text-black" : "alert-warning text-black"
+                }`}
                 role="alert"
                 dangerouslySetInnerHTML={{ __html: alertMessage }}
               />

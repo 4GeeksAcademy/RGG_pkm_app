@@ -13,7 +13,7 @@ export const UserPage = () => {
 
   useEffect(() => {
     // Hacer una solicitud HTTP para obtener los datos del usuario desde Flask
-    fetch("../api/models.py")
+    fetch(process.env.BACKEND_URL + "/api/register")
       .then((response) => response.json())
       .then((data) => {
         // Actualizar el estado local con los datos del usuario obtenidos
@@ -39,7 +39,7 @@ export const UserPage = () => {
                     type="text"
                     className="form-control input-user"
                     id="userName"
-                    defaultValue={userData.name}
+                    Value={userData.name}
                   />
                 </div>
                 <div className="mb-3 col-lg-6">

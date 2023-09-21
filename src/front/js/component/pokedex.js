@@ -49,11 +49,22 @@ export const Pokedex = () => {
       });
   }, []);
 
+  const handleFavoritoClick = (img) => {
+    if (store.isAuthenticated) {
+      // El usuario está autenticado, puedes agregar el Pokémon a favoritos
+      actions.setFavourite(img);
+    } else {
+      // El usuario no está autenticado, muestra un mensaje de error o redirígelo al inicio de sesión
+      alert("Debes iniciar sesión para agregar a favoritos.");
+      // O puedes redirigir al usuario a la página de inicio de sesión
+      // navigate("/login");
+    }
+  };
+
   return (
     <div className="App">
       <div className='pokegallery'>
         <input className="form-control inputBuscar" value={busqueda} placeholder="¿Qué Pokémon buscas?" onChange={handleChange}/>
-      
         {load ? (
           <p>Loading...</p>
         ) : (
@@ -81,8 +92,7 @@ export const Pokedex = () => {
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
                       {/* Agregar a Favoritos */}
                       {store.isAuthenticated ? (
-                        <button className="btn button-favourites" 
-                        onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
+                        <button className="btn button-favourites" onClick={() => handleFavoritoClick(img)}>Agregar a favoritos</button>
                       ) : (
                         <p>Debes iniciar sesión para agregar a favoritos</p>
                       )}
@@ -115,8 +125,7 @@ export const Pokedex = () => {
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
                       {/* Agregar a Favoritos */}
                       {store.isAuthenticated ? (
-                        <button className="btn button-favourites" 
-                        onClick={() =>{actions.setFavourite(img)}}>Agregar a favoritos</button>
+                        <button className="btn button-favourites" onClick={() => handleFavoritoClick(img)}>Agregar a favoritos</button>
                       ) : (
                         <p>Debes iniciar sesión para agregar a favoritos</p>
                       )}
