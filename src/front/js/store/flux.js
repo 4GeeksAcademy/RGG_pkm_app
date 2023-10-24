@@ -68,7 +68,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			const data = await response.json()
 			sessionStorage.setItem("token",data.token) 
 			if (response.status === 200) {
-			  setStore({ auth: true });
+			  setStore({ auth: true, user:data.user });
 			  return true;
 			} else {
 			  setStore({ auth: false });

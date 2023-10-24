@@ -57,7 +57,7 @@ def login():
     user = User.query.filter_by(email=email).first()
     if user and (user.password == password):
         token = create_access_token(identity=user.id)
-        return jsonify({"token": token}), 200
+        return jsonify({"token": token,"user":user.serialize()}), 200
     
 @api.route("/private", methods=["GET"])
 @jwt_required()
