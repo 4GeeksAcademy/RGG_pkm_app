@@ -40,20 +40,27 @@ export const Login = () => {
         navigate(redirectPath);
       } else {
         // Si no hay una ruta almacenada en localStorage, redirige al usuario a la página principal
-        navigate("/userPage");
+        navigate("/pokedex");
       }
     }
   }, [store.auth, navigate]);
 
   const handleLogin = async (event) => {
     event.preventDefault();
-
+  
     const email = event.target.email.value;
     const password = event.target.password.value;
-
+  
     const success = await actions.login(email, password);
-    if (!success) {
+  
+    if (success) {
+      // Actualiza el estado de autenticación
+      actions.setAuthentication(true);
+   
+    } else {
       setErrorMessage("Password or email incorrect");
+      
+      
     }
   };
 

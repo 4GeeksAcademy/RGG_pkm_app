@@ -52,9 +52,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 		  });
 		  setStore({ demo: demo });
 		},
-  
+		getAuthentication: () => {
+			const store = getStore();
+			return store.auth;
+		  },
+		setAuthentication: (value) => {
+			// Actualiza el estado de autenticación en el contexto
+			getStore().auth = value;
+		  },
 		login: async (email, password) => {
-			console.log(email, password)
+			
 		  try {
 			const response = await fetch(process.env.BACKEND_URL + "api/login", {
 			  method: "POST",
@@ -65,15 +72,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			  body: JSON.stringify({ email: email, password: password }),
 			
 			});
+			
 			const data = await response.json()
 			sessionStorage.setItem("token",data.token) 
 			if (response.status === 200) {
-			  setStore({ auth: true, user:data.user });
-			  return true;
-			} else {
-			  setStore({ auth: false });
-			  return false;
-			}
+				setStore({ auth: true, user: data.user });
+				return true;
+			  } else {
+				setStore({ auth: false });
+				return false;
+			  }
 		  } catch (error) {
 			console.error("Error al iniciar sesión:", error);
 			setStore({ auth: false });

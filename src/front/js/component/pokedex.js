@@ -4,6 +4,7 @@ import "../../styles/pokedex.css";
 import { Context } from "../store/appContext";
 
 export const Pokedex = () => {
+  
   const [result, setResult] = useState([]);
   const [poke, setPoke] = useState([]);
   const [load, setLoad] = useState(true);
@@ -11,6 +12,7 @@ export const Pokedex = () => {
   const [tablaPokemon, setTablaPokemon] = useState([]);
   const [busqueda, setBusqueda] = useState([]);
   const { store, actions } = useContext(Context);
+  
 
   const handleChange = (e) => {
     setBusqueda(e.target.value);
@@ -48,9 +50,12 @@ export const Pokedex = () => {
         setLoad(false);
       });
   }, []);
-
+  
   const handleFavoritoClick = (img) => {
-    if (store.isAuthenticated) {
+    let fav = actions.getAuthentication();
+    console.log(fav);
+  
+    if (fav === true) {    
       // El usuario está autenticado, puedes agregar el Pokémon a favoritos
       actions.setFavourite(img);
     } else {
@@ -60,9 +65,14 @@ export const Pokedex = () => {
       // navigate("/login");
     }
   };
+  
+  
+  
 
   return (
+    
     <div className="App">
+      
       <div className='pokegallery'>
         <input className="form-control inputBuscar" value={busqueda} placeholder="¿Qué Pokémon buscas?" onChange={handleChange}/>
         {load ? (
@@ -124,7 +134,7 @@ export const Pokedex = () => {
                       </div>
                       <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
                       {/* Agregar a Favoritos */}
-                      {store.isAuthenticated ? (
+                      {store.auth ? (
                         <button className="btn button-favourites" onClick={() => handleFavoritoClick(img)}>Agregar a favoritos</button>
                       ) : (
                         <p>Debes iniciar sesión para agregar a favoritos</p>
