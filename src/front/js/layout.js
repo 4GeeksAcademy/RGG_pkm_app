@@ -10,11 +10,11 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { LandingPage } from "./component/landingPage";
-import { Pokedex } from "./component/pokedex";
-import { PokemonDetail } from "./component/pokemonDetail";
-import { Login } from "./component/login";
-import { UserPage } from "./component/userPage";
-import { Favoritos } from "./component/favoritos";
+import { Pokedex } from "./pages/pokedex";
+import { PokemonDetail } from "./pages/pokemonDetail";
+import { Login } from "./pages/login";
+import { UserPage } from "./pages/userPage";
+import { Favoritos } from "./pages/favoritos";
 
 
 
