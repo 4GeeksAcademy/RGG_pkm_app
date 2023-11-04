@@ -8,13 +8,6 @@ import { Context } from "../store/appContext";
 export const UserPage = () => {
   const { store, actions } = useContext(Context)
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
-  
-
-
   return (
     <>
       <div className="container userPage-container">

@@ -44,23 +44,37 @@ def login():
 
     return jsonify({"message": "Invalid credentials"}), 401
 
+# Importa la clase FavoritePokemon si aún no lo has hecho
+from .models import FavoritePokemon
+
 # Endpoint para agregar un favorito a un usuario
 @app.route('/add_favorite/<user_id>/<pokemon_id>', methods=['POST'])
 @jwt_required()
 def add_favorite(user_id, pokemon_id):
-    # Aquí podrías agregar la lógica para almacenar el favorito en la base de datos
-    # También puedes obtener el usuario actualmente autenticado utilizando get_jwt_identity()
     current_user_id = get_jwt_identity()
+    
+    # Asume que `FavoritePokemon` es un modelo que tiene user_id y pokemon_id como campos
+    # Aquí se crea una instancia de `FavoritePokemon` y se la asocia al usuario actual
+    favorite = FavoritePokemon(user_id=current_user_id, pokemon_id=pokemon_id)
+    
+    db.session.add(favorite)
+    db.session.commit()
+    
     return jsonify(message='Favorite added successfully'), 200
 
 # Endpoint para eliminar un favorito de un usuario
 @app.route('/remove_favorite/<user_id>/<pokemon_id>', methods=['DELETE'])
 @jwt_required()
 def remove_favorite(user_id, pokemon_id):
-    # Aquí podrías agregar la lógica para eliminar el favorito de la base de datos
-    # También puedes obtener el usuario actualmente autenticado utilizando get_jwt_identity()
     current_user_id = get_jwt_identity()
-    return jsonify(message='Favorite removed successfully'), 200
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    
+    # Asume que `FavoritePokemon` es un modelo que tiene user_id y pokemon_id como campos
+    # Aquí se busca la instancia de `FavoritePokemon` asociada al usuario actual y al pokemon_id
+    favorite = FavoritePokemon.query.filter_by(user_id=current_user_id, pokemon_id=pokemon_id).first()
+    
+    if favorite:
+        db.session.delete(favorite)
+        db.session.commit()
+        return jsonify(message='Favorite removed successfully'), 200
+    else:
+        return jsonify(message="Favorite not found"), 404

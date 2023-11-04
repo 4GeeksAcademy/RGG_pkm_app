@@ -32,7 +32,15 @@ class User(db.Model):
            "email": self.email,
            "birthday": self.birthday,
         }
+    
+class FavoritePokemon(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    pokemon_name = db.Column(db.String(100))
 
+    def __repr__(self):
+        return f'<FavoritePokemon: {self.pokemon_name}>'
+    
 @api.route("/register", methods=["POST"])
 def register():
     data = request.get_json()
@@ -95,3 +103,5 @@ app.register_blueprint(api)
 
 if __name__ == '__main__':
     app.run()
+
+
