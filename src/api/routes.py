@@ -70,10 +70,6 @@ def get_user_info():
     
     return jsonify(message="Welcome, {}".format(user.name)), 200
 
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=3001)
-
 @api.route("/add_favorite", methods=["POST"])
 def add_favorite():
     if not request.is_json:
@@ -90,8 +86,8 @@ def add_favorite():
     if user_id is None:
         return jsonify({"message": "User not authenticated"}), 401
 
-    favorite_pokemon = FavoritePokemon(user_id=user_id, pokemon_name=pokemon_name)
-    db.session.add(favorite_pokemon)
+    new_favorite_pokemon = FavoritePokemon(user_id=user_id, pokemon_name=pokemon_name)
+    db.session.add(new_favorite_pokemon)
     db.session.commit()
 
     return jsonify({"message": "Pokémon added to favorites successfully"})
@@ -122,3 +118,5 @@ def remove_favorite():
     else:
         return jsonify({"message": "Pokémon not found in favorites"}), 404
 
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=3001)
