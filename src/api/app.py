@@ -35,7 +35,7 @@ def login():
     if not email or not password:
         return jsonify({"message": "Email and password are required"}), 400
 
-    # Supongo que debes buscar al usuario en la colección 'users' de MongoDB y verificar su contraseña
+    
     user = users_collection.find_one({'username': email})
     
     if user and bcrypt.checkpw(password.encode('utf-8'), user['password']):
@@ -53,8 +53,7 @@ from .models import FavoritePokemon
 def add_favorite(user_id, pokemon_id):
     current_user_id = get_jwt_identity()
     
-    # Asume que `FavoritePokemon` es un modelo que tiene user_id y pokemon_id como campos
-    # Aquí se crea una instancia de `FavoritePokemon` y se la asocia al usuario actual
+    
     favorite = FavoritePokemon(user_id=current_user_id, pokemon_id=pokemon_id)
     
     db.session.add(favorite)
@@ -62,14 +61,13 @@ def add_favorite(user_id, pokemon_id):
     
     return jsonify(message='Favorite added successfully'), 200
 
-# Endpoint para eliminar un favorito de un usuario
+
 @app.route('/remove_favorite/<user_id>/<pokemon_id>', methods=['DELETE'])
 @jwt_required()
 def remove_favorite(user_id, pokemon_id):
     current_user_id = get_jwt_identity()
     
-    # Asume que `FavoritePokemon` es un modelo que tiene user_id y pokemon_id como campos
-    # Aquí se busca la instancia de `FavoritePokemon` asociada al usuario actual y al pokemon_id
+  
     favorite = FavoritePokemon.query.filter_by(user_id=current_user_id, pokemon_id=pokemon_id).first()
     
     if favorite:
