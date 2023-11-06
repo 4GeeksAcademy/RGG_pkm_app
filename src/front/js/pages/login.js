@@ -52,7 +52,7 @@ export const Login = () => {
     const password = event.target.password.value;
   
     const success = await actions.login(email, password);
-  
+
     if (success) {
       // Actualiza el estado de autenticación
       actions.setAuthentication(true);

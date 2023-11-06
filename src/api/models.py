@@ -33,13 +33,13 @@ class User(db.Model):
            "birthday": self.birthday,
         }
     
-class FavoritePokemon(db.Model):
+class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    pokemon_name = db.Column(db.String(100))
+    pokemon_id = db.Column(db.String(100)) 
 
     def __repr__(self):
-        return f'<FavoritePokemon: {self.pokemon_name}>'
+        return f'<Favorite: {self.pokemon_id}>'
     
 @api.route("/register", methods=["POST"])
 def register():
