@@ -54,7 +54,7 @@ def login():
         return jsonify({"message": "Email and password are required"}), 400
 
     user = User.query.filter_by(email=email).first()
-    if user and check_password_hash(user.password, password):  # Cambio para verificar la contraseña
+    if user and (user.password == password):  # Cambio para verificar la contraseña
         token = create_access_token(identity=user.id)
         return jsonify({"token": token, "user": user.serialize()}), 200
 
