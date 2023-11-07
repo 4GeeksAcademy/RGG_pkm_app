@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+
 import { Link } from "react-router-dom";
 import "../../styles/pokedex.css";
 import { Context } from "../store/appContext";
@@ -55,11 +56,25 @@ export const Pokedex = () => {
     let fav = actions.getAuthentication();
     console.log(fav);
   
-    if (fav === true) {    
-      // El usuario está autenticado, puedes agregar el Pokémon a favoritos
-      actions.setFavourite(img);
+    if (fav === true) {
+      // El usuario está autenticado, envía una solicitud al backend
+      fetch('api/add_favorite', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ pokemon_id: img.id }), // Envia el ID del Pokémon
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          // Realiza acciones en la interfaz de usuario según la respuesta del servidor
+          // Por ejemplo, muestra un mensaje de éxito o actualiza la lista de favoritos en el frontend.
+        })
+        .catch((error) => {
+          console.error('Error al agregar a favoritos:', error);
+        });
     } else {
-      // El usuario no está autenticado, muestra un mensaje de error o redirígelo al inicio de sesión
+      // El usuario no está autenticado, muestra un mensaje de error o redirige al inicio de sesión.
       alert("Debes iniciar sesión para agregar a favoritos.");
       // O puedes redirigir al usuario a la página de inicio de sesión
       // navigate("/login");

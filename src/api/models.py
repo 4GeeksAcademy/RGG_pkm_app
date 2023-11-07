@@ -37,6 +37,8 @@ class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     pokemon_id = db.Column(db.String(100)) 
+    
+    
 
     def __repr__(self):
         return f'<Favorite: {self.pokemon_id}>'

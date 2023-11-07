@@ -5,6 +5,25 @@ import "../../styles/favoritos.css";
 
 export const Favoritos = () => {
   const { store, actions } = useContext(Context);
+  const DelFavourite = (img) => {
+    // Envía una solicitud al backend para eliminar el Pokémon de favoritos
+    fetch('/remove_favorite', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ pokemon_id: img.id }), // Envía el ID del Pokémon
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Realiza acciones en la interfaz de usuario según la respuesta del servidor
+        // Por ejemplo, elimina el Pokémon de la lista de favoritos en el frontend.
+      })
+      .catch((error) => {
+        console.error('Error al eliminar de favoritos:', error);
+      });
+  };
+  
 
   return (
   

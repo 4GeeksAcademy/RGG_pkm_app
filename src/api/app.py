@@ -23,8 +23,9 @@ users_collection = mongo_db['users']
 # Define el modelo Favorite (SQLite)
 class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, nullable=False)
-    pokemon_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    pokemon_id = db.Column(db.String(100))
+
 
 # Endpoint de registro de usuarios en MongoDB
 @app.route('/register', methods=['POST'])
@@ -64,7 +65,7 @@ def login():
     return jsonify({"message": "Invalid credentials"}), 401
 
 # Endpoint para agregar un favorito a un usuario
-@app.route('/add_favorite', methods=['POST'])
+@app.route('/api/add_favorite', methods=['POST'])
 @jwt_required()
 def add_favorite():
     data = request.get_json()

@@ -69,7 +69,7 @@ def get_user_info():
 
     return jsonify(message="Welcome, {}".format(user.name)), 200
 
-@api.route("/add_favorite", methods=["POST"])
+@api.route("/api/add_favorite", methods=["POST"])
 @jwt_required()
 def add_favorite():
     data = request.get_json()
