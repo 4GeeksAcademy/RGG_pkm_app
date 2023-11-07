@@ -58,7 +58,7 @@ export const Pokedex = () => {
   
     if (fav === true) {
       // El usuario está autenticado, envía una solicitud al backend
-      fetch('api/add_favorite', {
+      fetch('/add_favorite', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

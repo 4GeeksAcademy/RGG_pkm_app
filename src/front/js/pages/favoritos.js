@@ -16,8 +16,7 @@ export const Favoritos = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        // Realiza acciones en la interfaz de usuario según la respuesta del servidor
-        // Por ejemplo, elimina el Pokémon de la lista de favoritos en el frontend.
+       
       })
       .catch((error) => {
         console.error('Error al eliminar de favoritos:', error);
@@ -59,7 +58,7 @@ export const Favoritos = () => {
                 </div>
               </div>
               <Link to={`/pokedex/${img.id}`} className="detalle-pokedex">Detalle del pokemon</Link>
-              {/* Agregar a Favoritos */}
+             
               <button className="btn button-favourites" 
               onClick={() =>{actions.DelFavourite(img)}}>Eliminar de favoritos</button>
             </div>

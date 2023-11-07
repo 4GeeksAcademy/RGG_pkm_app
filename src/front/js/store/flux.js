@@ -18,16 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		auth: null // Campo de autenticación
 	  },
 	  actions: {
-		// setFavourite: (img) => {
-		//   const store = getStore();
-		//   console.log([...store.favourites, img]);
-		//   setStore({ favourites: [...store.favourites, img] });
-		// },
-		DelFavourite: (img) => {
-		  const store = getStore();
-		  const updatedFavorites = store.favourites.filter((favorite) => favorite !== img);
-		  setStore({ favourites: updatedFavorites });
-		},
+	
 		exampleFunction: () => {
 		  getActions().changeColor(0, "green");
 		},
@@ -86,10 +77,40 @@ const getState = ({ getStore, getActions, setStore }) => {
 			setStore({ auth: false });
 			return false;
 		  }
+		},
+		addFavorite: async (pokemonId) => {
+			const store = getStore();
+			const token = sessionStorage.getItem("token");
+	
+			if (!token) {
+			  console.error("Usuario no autenticado");
+			  return;
+			}
+	
+			try {
+			  const response = await fetch(process.env.BACKEND_URL + "api/add_favorite", {
+				method: "POST",
+				headers: {
+				  "Content-Type": "application/json",
+				  Authorization: `Bearer ${token}`,
+				},
+				body: JSON.stringify({ pokemon_id: pokemonId }),
+			  });
+	
+			  if (response.status === 200) {
+				// Si la solicitud se completa con éxito, actualiza la lista de favoritos en el estado
+				const favoriteList = [...store.favorites, pokemonId];
+				setStore({ favorites: favoriteList });
+			  } else {
+				console.error("Error al agregar a favoritos");
+			  }
+			} catch (error) {
+			  console.error("Error al agregar a favoritos:", error);
+			}
+		  }
 		}
-	  }
+	  };
 	};
-  };
-  
+
   export default getState;
   
