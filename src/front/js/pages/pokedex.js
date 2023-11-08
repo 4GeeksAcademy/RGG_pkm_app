@@ -57,8 +57,12 @@ export const Pokedex = () => {
     console.log(fav);
   
     if (fav === true) {
+      const token = sessionStorage.getItem("token"); // Recupera el token desde donde lo hayas almacenado
+  console.log(token);
+
+  if (token) {
       // El usuario está autenticado, envía una solicitud al backend
-      fetch('/add_favorite', {
+      fetch(process.env.BACKEND_URL + "api/add_favorite", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -79,7 +83,8 @@ export const Pokedex = () => {
       // O puedes redirigir al usuario a la página de inicio de sesión
       // navigate("/login");
     }
-  };
+  }
+};
   
   
   

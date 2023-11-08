@@ -65,7 +65,7 @@ def login():
     return jsonify({"message": "Invalid credentials"}), 401
 
 # Endpoint para agregar un favorito a un usuario
-@app.route('add_favorite', methods=['POST'])
+@app.route('/add_favorite', methods=['POST'])
 @jwt_required()
 def add_favorite():
     data = request.get_json()
