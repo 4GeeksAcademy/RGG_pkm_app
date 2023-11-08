@@ -81,11 +81,28 @@ def add_favorite():
     db.session.commit()
 
     return jsonify({"message": "Pokémon added to favorites successfully"})
-
-# Endpoint para eliminar un favorito de un usuario
-@app.route('/remove_favorite', methods=['POST'])
+#Endpoint get para dibujar favoritos
+# Endpoint para obtener los favoritos de un usuario
+@app.route('/favoritos', methods=['GET'])
 @jwt_required()
-def remove_favorite():
+def favoritos():
+    current_user_id = get_jwt_identity()
+    favorite_pokemons = Favorite.query.filter_by(user_id=current_user_id).all()
+
+    # Crear una lista de Pokémon favoritos
+    favorites_list = []
+    for favorite_pokemon in favorite_pokemons:
+        pokemon = {
+            'id': favorite_pokemon.pokemon_id,
+            # Aquí puedes agregar más información sobre el Pokémon si es necesario
+        }
+        favorites_list.append(pokemon)
+
+    return jsonify(favorites_list)
+# Endpoint para eliminar un favorito de un usuario
+@app.route('/remove_favorite/<id>', methods=['DELETE'])
+@jwt_required()
+def remove_favorite(id):
     data = request.get_json()
     pokemon_id = data.get("pokemon_id")
 

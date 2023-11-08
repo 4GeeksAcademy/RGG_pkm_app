@@ -35,7 +35,7 @@ export const Navbar = () => {
 
 </form>
 
-<Link to={"/favoritos"} className="favoritos-button">Favoritos: {store.favourites.length} </Link>
+<Link to={"/favoritos"} className="favoritos-button">Favoritos </Link>
 	  <div className="btn  buttton-login-navbar mb-2 mb-lg-0 col-md-7  col-sm-4 ">
 
 {store.auth ? (
