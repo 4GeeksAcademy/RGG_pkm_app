@@ -8,7 +8,8 @@ export const Favoritos = () => {
 
   useEffect(() => {
     // Cargar los Pokémon favoritos cuando se monta el componente
-    fetch(process.env.BACKEND_URL + '/favoritos', {
+    fetch(process.env.BACKEND_URL + '/favoritos',
+    {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +43,7 @@ export const Favoritos = () => {
         console.error('Error al eliminar de favoritos:', error);
       });
   };
-
+console.log(store.favourites)
   return (
     <div className="favoritos-container">
       <ul className="favoritos-list">
@@ -65,10 +66,11 @@ export const Favoritos = () => {
                             Detalle del Pokémon
                           </Link>
                           <button
-                            className="btn button-favourites"
-                            onClick={() => DelFavourite(pokemon.id)}>
-                            Eliminar de favoritos
-                          </button>
+  className="btn button-favourites"
+  onClick={() => DelFavourite(pokemon.id)}>
+  Eliminar de favoritos
+</button>
+
                         </div>
                       </div>
                     </div>

@@ -13,6 +13,7 @@ export const Pokedex = () => {
   const [tablaPokemon, setTablaPokemon] = useState([]);
   const [busqueda, setBusqueda] = useState([]);
   const { store, actions } = useContext(Context);
+  const [mensaje,setMensaje]=useState("");
   
 
   const handleChange = (e) => {
@@ -72,6 +73,7 @@ export const Pokedex = () => {
       })
         .then((response) => response.json())
         .then((data) => {
+          setMensaje("Pokemon agregado con exito");
        
         })
         .catch((error) => {
@@ -158,6 +160,7 @@ export const Pokedex = () => {
                       ) : (
                         <p>Debes iniciar sesión para agregar a favoritos</p>
                       )}
+                      <div>{mensaje}</div>
                     </div>
                   </div>
                 </div>

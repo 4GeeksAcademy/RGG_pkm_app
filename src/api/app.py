@@ -94,7 +94,7 @@ def favoritos():
     for favorite_pokemon in favorite_pokemons:
         pokemon = {
             'id': favorite_pokemon.pokemon_id,
-            # Aquí puedes agregar más información sobre el Pokémon si es necesario
+            "name":favorite_pokemon.pokemon_name,
         }
         favorites_list.append(pokemon)
 

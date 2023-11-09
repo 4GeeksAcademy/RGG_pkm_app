@@ -1,5 +1,9 @@
 from flask import Flask, request, jsonify, Blueprint
 from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import get_jwt_identity
+from sqlalchemy.orm import relationship
+
 from flask_jwt_extended import create_access_token
 import bcrypt
 
@@ -18,6 +22,7 @@ class User(db.Model):
     last_name = db.Column(db.String(120), unique=False, nullable=False)
     nickname = db.Column(db.String(120), unique=True, nullable=False)
     birthday = db.Column(db.String(80), unique=False, nullable=True)
+    favorites = relationship("Favorite", back_populates="user")
   
 
     def __repr__(self):
@@ -31,17 +36,37 @@ class User(db.Model):
            "nickname": self.nickname,
            "email": self.email,
            "birthday": self.birthday,
+           
         }
     
 class Favorite(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     pokemon_id = db.Column(db.String(100)) 
+    user = relationship("User", back_populates="favorites")
     
     
 
     def __repr__(self):
         return f'<Favorite: {self.pokemon_id}>'
+    
+@api.route('/favoritos', methods=['GET'])
+@jwt_required()
+def obtener_favoritos():
+    current_user_id = get_jwt_identity()
+    favoritos = Favorite.query.filter_by(user_id=current_user_id).all()
+
+    # Crear una lista de Pokémon favoritos con detalles
+    favoritos_list = []
+    for favorito in favoritos:
+        # Aquí, en lugar de solo guardar el id del Pokémon, obtén más detalles si es necesario
+        pokemon = {
+            "id": favorito.pokemon_id,
+            # Agrega más detalles del Pokémon aquí, si es necesario
+        }
+        favoritos_list.append(pokemon)
+
+    return jsonify(favoritos_list) 
     
 @api.route("/register", methods=["POST"])
 def register():
@@ -80,6 +105,7 @@ def register():
     db.session.commit()
 
     return jsonify({"message": "User registered successfully"})
+
 
 @api.route("/login", methods=["POST"])
 def login():

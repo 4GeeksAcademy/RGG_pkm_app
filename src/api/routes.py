@@ -86,6 +86,23 @@ def add_favorite():
 
     return jsonify({"message": "Pokémon added to favorites successfully"})
 
+@api.route('/favoritos', methods=['GET'])
+@jwt_required()
+def obtener_favoritos():
+    current_user_id = get_jwt_identity()
+    favoritos = Favorite.query.filter_by(user_id=current_user_id).all()
+
+    # Crear una lista de Pokémon favoritos
+    favoritos_list = []
+    for favorito in favoritos:
+        pokemon = {
+            'id': favorito.pokemon_id,
+            # Puedes agregar más información sobre el Pokémon si es necesario
+        }
+        favoritos_list.append(pokemon)
+
+    return jsonify(favoritos_list)
+
 @api.route("/remove_favorite", methods=["POST"])
 @jwt_required()
 def remove_favorite():
