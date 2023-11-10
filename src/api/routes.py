@@ -88,21 +88,20 @@ def add_favorite():
 
 @api.route('/favoritos', methods=['GET'])
 @jwt_required()
-def obtener_favoritos():
+def favoritos():
     current_user_id = get_jwt_identity()
-    favoritos = Favorite.query.filter_by(user_id=current_user_id).all()
-
+    favorite_pokemons = Favorite.query.filter_by(user_id=current_user_id).all()
+    print(favorite_pokemons)
     # Crear una lista de Pokémon favoritos
-    favoritos_list = []
-    for favorito in favoritos:
+    favorites_list = []
+    for favorite_pokemon in favorite_pokemons:
         pokemon = {
-            'id': favorito.pokemon_id,
-            # Puedes agregar más información sobre el Pokémon si es necesario
+            'id': favorite_pokemon.pokemon_id,
+            
         }
-        favoritos_list.append(pokemon)
+        favorites_list.append(pokemon)
 
-    return jsonify(favoritos_list)
-
+    return jsonify(favorites_list)
 @api.route("/remove_favorite", methods=["POST"])
 @jwt_required()
 def remove_favorite():
